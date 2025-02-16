@@ -1,0 +1,35 @@
+@import "tailwindcss";
+*{
+    margin: 0%;
+    padding: 0%;
+}
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    height: 100vh;
+}
+
+body::-webkit-scrollbar {
+    width: 10px;
+}
+body::-webkit-scrollbar-thumb {
+    background: #a4a4a4;
+    border-radius: 6px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background: #6e6e6e;
+}
+.loading {
+    animation: loading 2s linear 0s;
+}
+@keyframes loading {
+    0%{
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    100%{
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
