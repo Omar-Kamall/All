@@ -3,7 +3,7 @@ import { img8 } from "../assets";
 const Head = () => {
     return (
         <header className="pt-17!">
-            <div className="loading mx-5!">
+            <div className="loading mx-[5%]!">
                 <div className="container mx-auto! grid grid-cols-1 md:grid-cols-2">
                     <div className="flex justify-center h-full flex-col">
                         <h1 className="font-bold text-5xl md:text-6xl lg:text-7xl mb-5!">We Help People to Get Appiontment In Online</h1>

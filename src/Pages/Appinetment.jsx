@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Swal from 'sweetalert2';
 
 const Appinetment = () => {
@@ -15,19 +16,31 @@ const Appinetment = () => {
             { id: 2, name: "Abdo Hosam" }, { id: 2, name: "Ahmed Hosam" }, { id: 3, name: "Moaaz Nar" }
         ]},
     ];
+    // Submit
+    const [fristname ,setFristname] = useState('');
+    const [lastname ,setLastname] = useState('');
+    const [email ,setEmail] = useState('');
+    const [tel ,setTel] = useState('');
+    const [nic ,setNic] = useState('');
+    const [date ,setDate] = useState('');
+    const [gender ,setGender] = useState('');
+    const [appointment_date ,setAppointment_date] = useState('');
+    const [department_name ,setDepartment_name] = useState('');
+    const [doctor_name ,setDoctor_name] = useState('');
+    const [address ,setAddress] = useState('');
     const handle = (event) => {
         event.preventDefault();
-        const fname = event.target.fristname.value.trim();
-        const lname = event.target.lastname.value.trim();
-        const Email = event.target.email.value.trim();
-        const tel = event.target.tel.value.trim();
-        const NIC = event.target.nic.value.trim();
-        const Date = event.target.date.value.trim();
-        const Gender = event.target.gender.value.trim();
-        const Appointment_Date = event.target.appointment_date.value.trim();
-        const Department_Name = event.target.department_name.value.trim();
-        const Doctor_Name = event.target.doctor_name.value.trim();
-        const Address = event.target.address.value.trim();
+        const fname = fristname.trim();
+        const lname = lastname.trim();
+        const Email = email.trim();
+        const Tel = tel.trim();
+        const NIC = nic.trim();
+        const Date = date.trim();
+        const Gender = gender.trim();
+        const Appointment_Date = appointment_date.trim();
+        const Department_Name = department_name.trim();
+        const Doctor_Name = doctor_name.trim();
+        const Address = address.trim();
         if(!fname || fname.length < 2)
             Swal.fire({
                     icon: "error",
@@ -46,7 +59,7 @@ const Appinetment = () => {
                     title: "Oops...",
                     text: "Please Compelte Email",
             });
-        else if(!tel || tel.length < 11 || isNaN(tel))
+        else if(!Tel || Tel.length < 11 || isNaN(Tel))
             Swal.fire({
                     icon: "error",
                     title: "Oops...",
@@ -110,40 +123,40 @@ const Appinetment = () => {
                         <h1 className="font-bold text-2xl flex justify-center mb-5!">Appointment</h1>
                         <div className="grid grid-cols-1 gap-1">
                             <div className="grid grid-cols-1 md:grid-cols-2">
-                                <input className="p-2! m-2! ring-4 ring-gray-400 focus:border-0 focus:ring-4 focus:ring-[#c5baff] outline-none rounded transition duration-500" type="text" name="fristname" placeholder="Frist Name" />
-                                <input className="p-2! m-2! ring-4 ring-gray-400 focus:border-0 focus:ring-4 focus:ring-[#c5baff] outline-none rounded transition duration-500" type="text" name="lastname" placeholder="Last Name" />
+                                <input className="p-2! m-2! ring-4 ring-gray-400 focus:border-0 focus:ring-4 focus:ring-[#c5baff] outline-none rounded transition duration-500" type="text" value={fristname} onChange={(e) => setFristname(e.target.value)} name="fristname" placeholder="Frist Name" />
+                                <input className="p-2! m-2! ring-4 ring-gray-400 focus:border-0 focus:ring-4 focus:ring-[#c5baff] outline-none rounded transition duration-500" type="text" value={lastname} onChange={(e) => setLastname(e.target.value)} name="lastname" placeholder="Last Name" />
                             </div>
                             <div className="grid grid-cols-1 md:grid-cols-2">
-                                <input className="p-2! m-2! ring-4 ring-gray-400 focus:border-0 focus:ring-4 focus:ring-[#c5baff] outline-none rounded transition duration-500" type="text" name="email" placeholder="Email" /> 
-                                <input className="p-2! m-2! ring-4 ring-gray-400 focus:border-0 focus:ring-4 focus:ring-[#c5baff] outline-none rounded transition duration-500" type="tel" name="tel" placeholder="Modile Number" />
+                                <input className="p-2! m-2! ring-4 ring-gray-400 focus:border-0 focus:ring-4 focus:ring-[#c5baff] outline-none rounded transition duration-500" type="text" value={email} onChange={(e) => setEmail(e.target.value)} name="email" placeholder="Email" /> 
+                                <input className="p-2! m-2! ring-4 ring-gray-400 focus:border-0 focus:ring-4 focus:ring-[#c5baff] outline-none rounded transition duration-500" type="tel" value={tel} onChange={(e) => setTel(e.target.value)} name="tel" placeholder="Modile Number" />
                             </div>
                             <div className="grid grid-cols-1 md:grid-cols-2">
-                                <input className="p-2! m-2! ring-4 ring-gray-400 focus:border-0 focus:ring-4 focus:ring-[#c5baff] outline-none rounded transition duration-500" type="text" name="nic" placeholder="NIC" />
-                                <input className="p-2! m-2! ring-4 ring-gray-400 focus:border-0 focus:ring-4 focus:ring-[#c5baff] outline-none rounded transition duration-500" type="date" name="date" placeholder="Date Of Birth" />
+                                <input className="p-2! m-2! ring-4 ring-gray-400 focus:border-0 focus:ring-4 focus:ring-[#c5baff] outline-none rounded transition duration-500" type="text" value={nic} onChange={(e) => setNic(e.target.value)} name="nic" placeholder="NIC" />
+                                <input className="p-2! m-2! ring-4 ring-gray-400 focus:border-0 focus:ring-4 focus:ring-[#c5baff] outline-none rounded transition duration-500" type="date" value={date} onChange={(e) => setDate(e.target.value)} name="date" placeholder="Date Of Birth" />
                             </div>
                             <div className="grid grid-cols-1 md:grid-cols-2">
-                                <select name="gender" className="p-2! m-2! ring-4 ring-gray-400 focus:border-0 focus:ring-4 focus:ring-[#c5baff] outline-none rounded transition duration-500">
+                                <select value={gender} onChange={(e) => setGender(e.target.value)} name="gender" className="p-2! m-2! ring-4 ring-gray-400 focus:border-0 focus:ring-4 focus:ring-[#c5baff] outline-none rounded transition duration-500">
                                     <option value="">Gender</option>
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
                                     <option value="Custom">Custom</option>
                                 </select> 
-                                <input className="p-2! m-2! ring-4 ring-gray-400 focus:border-0 focus:ring-4 focus:ring-[#c5baff] outline-none rounded transition duration-500" type="date" name="appointment_date" placeholder="Appointment Date" />
+                                <input value={appointment_date} onChange={(e) => setAppointment_date(e.target.value)} className="p-2! m-2! ring-4 ring-gray-400 focus:border-0 focus:ring-4 focus:ring-[#c5baff] outline-none rounded transition duration-500" type="date" name="appointment_date" placeholder="Appointment Date" />
                             </div>
                             <div className="grid grid-cols-1 md:grid-cols-2">
-                                <select name="department_name" className="p-2! m-2! ring-4 ring-gray-400 focus:border-0 focus:ring-4 focus:ring-[#c5baff] outline-none rounded transition duration-500">
+                                <select value={department_name} onChange={(e) => setDepartment_name(e.target.value)} name="department_name" className="p-2! m-2! ring-4 ring-gray-400 focus:border-0 focus:ring-4 focus:ring-[#c5baff] outline-none rounded transition duration-500">
                                     <option value="">Department Name</option>
                                     {data.map(item => (
                                         <option key={item.id} value={item.name}>{item.name}</option>
                                     ))}
                                 </select> 
-                                <select name="doctor_name" className="p-2! m-2! ring-4 ring-gray-400 focus:border-0 focus:ring-4 focus:ring-[#c5baff] outline-none rounded transition duration-500">
+                                <select value={doctor_name} onChange={(e) => setDoctor_name(e.target.value)} name="doctor_name" className="p-2! m-2! ring-4 ring-gray-400 focus:border-0 focus:ring-4 focus:ring-[#c5baff] outline-none rounded transition duration-500">
                                     <option value="">Doctor Name</option>
                                     <option value="omar">Omar Kamal</option>
                                 </select> 
                             </div>
                             <div className="grid grid-cols-1">
-                                <textarea className="h-30 p-2! m-2! ring-4 ring-gray-400 focus:border-0 focus:ring-4 focus:ring-[#c5baff] outline-none rounded transition duration-500" name="address" placeholder="Address Or Location"></textarea>
+                                <textarea value={address} onChange={(e) => setAddress(e.target.value)} className="h-30 p-2! m-2! ring-4 ring-gray-400 focus:border-0 focus:ring-4 focus:ring-[#c5baff] outline-none rounded transition duration-500" name="address" placeholder="Address Or Location"></textarea>
                             </div>
                             <div className="flex justify-center mt-4!">
                                 <input className="px-30! py-2! cursor-pointer text-white bg-[#c5baff] hover:scale-105 hover:bg-[#B7B7B7] shadow-black shadow-2xl rounded-2xl transition duration-600" type="submit" value="Register" />

@@ -21,7 +21,7 @@ const Serveices = () => {
     ]
     return (
         <section className="bg-[#EEECF8] pt-15!">
-            <div className="loading mx-5! py-10!">
+            <div className="loading mx-[5%]! py-10!">
                 <div className="container mx-auto!">
                     <div className="text-2xl font-bold flex justify-center mb-5!">OUR SERVICES</div>
                     <Swiper
@@ -49,12 +49,10 @@ const Serveices = () => {
                         className="mySwiper w-[80%]"
                     >
                         {data.map(item => (
-                            <div key={item.id}>
-                                <SwiperSlide className='bg-white rounded-3xl'>
-                                    <img className='rounded-3xl w-full h-[250px] mb-3!' src={item.img} alt="Image-Error" />
-                                    <h3 className='mb-3!'>{item.title}</h3>
-                                </SwiperSlide>
-                            </div>
+                            <SwiperSlide key={item.id} className='bg-white rounded-3xl'>
+                                <img className='rounded-3xl w-full h-[250px] mb-3!' src={item.img} alt="Image-Error" />
+                                <h3 className='mb-3!'>{item.title}</h3>
+                            </SwiperSlide>
                         ))}
                     </Swiper>
                 </div>

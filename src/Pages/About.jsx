@@ -1,4 +1,5 @@
-import Aboutus from '../Component/Aboutus'
+import { lazy } from "react"
+const Aboutus = lazy(() => import ('../Component/Aboutus'));
 
 const About = () => {
     return (

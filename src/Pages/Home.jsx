@@ -1,7 +1,8 @@
-import Aboutus from '../Component/Aboutus'
-import Serveices from '../Component/Serveices'
-import OurDoc from '../Component/OurDoc'
-import Contactus from '../Component/Contactus'
+import { lazy } from 'react';
+const Aboutus = lazy(() => import ('../Component/Aboutus'));
+const Serveices = lazy(() => import ('../Component/Serveices'));
+const OurDoc = lazy(() => import ('../Component/OurDoc'));
+const Contactus = lazy(() => import ('../Component/Contactus'));
 
 const Home = () => {
     return (

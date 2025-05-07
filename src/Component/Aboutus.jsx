@@ -3,7 +3,7 @@ import { img7 } from "../assets"
 const Aboutus = () => {
     return (
         <section className="h-full">
-            <div className="loading mx-5! py-15!">
+            <div className="loading mx-[5%]! py-15!">
                 <div className="container mx-auto! grid grid-cols-1 md:grid-cols-2 gap-5">
                     <div className="w-full">
                         <img className="h-[90%] w-full" src={img7} alt="Image-Error"/>

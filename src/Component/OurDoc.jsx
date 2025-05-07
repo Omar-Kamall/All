@@ -21,7 +21,7 @@ const OurDoc = () => {
     ]
     return (
         <section>
-            <div className="mx-5! pt-10!">
+            <div className="mx-[5%]! pt-10!">
                 <div className="container mx-auto!">
                     <div className="text-2xl font-bold flex justify-center mb-5!">OUR Doctors</div>
                     <Swiper
@@ -34,12 +34,10 @@ const OurDoc = () => {
                         className="mySwiper "
                     >
                         {data.map(item => (
-                            <div key={item.id}>
-                                <SwiperSlide className='bg-[#EEECF8] py-10!'>
-                                    <img className='h-30 w-30 rounded-full mb-5! bg-contain' src={item.img} alt="Image-Error" />
-                                    <h3 className='mb-2! font-bold font-mono'>Dr: {item.title}</h3>
-                                </SwiperSlide>
-                            </div>
+                            <SwiperSlide key={item.id} className='bg-[#EEECF8] py-10!'>
+                                <img className='h-30 w-30 rounded-full mb-5! bg-contain' src={item.img} alt="Image-Error" />
+                                <h3 className='mb-2! font-bold font-mono'>Dr: {item.title}</h3>
+                            </SwiperSlide>
                         ))}
                     </Swiper>
                 </div>
