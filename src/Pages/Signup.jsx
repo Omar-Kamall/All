@@ -1,5 +1,6 @@
 import { useState , useEffect } from 'react';
 import { BiSolidHide, BiSolidShow } from "react-icons/bi";
+import { SignUp } from '../Api/Auth';
 import Swal from 'sweetalert2';
 
 const Signup = () => {
@@ -23,7 +24,7 @@ const Signup = () => {
     const [address ,setAddress] = useState("");
     const [gender ,setGender] = useState("");
     const [password ,setPassword] = useState("");
-    const handle = (event) => {
+    const handle = async (event) => {
         event.preventDefault();
         const fname = fristName.trim();
         const lname = lastName.trim();
@@ -96,11 +97,29 @@ const Signup = () => {
                     text: "Please Compelete Confirm Password",
             });
         else{
-            Swal.fire({
-                icon: "success",
-                title: "Rigster Sucssesfuly ....",
-            });
-            event.target.reset();
+            try{
+                await SignUp({
+                    firstname: fname,
+                    lastname: lname,
+                    email: Email,
+                    mobilnumber: Tel,
+                    national_identity_card: Nic,
+                    date_of_birth: Date,
+                    adress: Address,
+                    gender: Gender,
+                    password: Password,
+                });
+                Swal.fire({
+                    icon: "success",
+                    title: "Rigster Sucssesfuly ....",
+                });
+                event.target.reset();
+            }catch(error) {
+                Swal.fire({
+                    icon: "error",
+                    title: `Error : ${error}`,
+                });
+            }
         }
     }
     return (

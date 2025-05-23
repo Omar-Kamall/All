@@ -28,6 +28,7 @@ const Appinetment = () => {
     const [department_name ,setDepartment_name] = useState('');
     const [doctor_name ,setDoctor_name] = useState('');
     const [address ,setAddress] = useState('');
+    // On Submit
     const handle = (event) => {
         event.preventDefault();
         const fname = fristname.trim();

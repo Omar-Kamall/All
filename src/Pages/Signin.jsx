@@ -2,6 +2,7 @@ import { useState , useEffect } from 'react';
 import { BiSolidHide, BiSolidShow } from "react-icons/bi";
 import { useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
+import { SignIn } from '../Api/Auth';
 
 const Signin = () => {
     // location
@@ -22,7 +23,7 @@ const Signin = () => {
     // Kind Login
     const [role , setRole] = useState("");
     // Submit And Validationt
-    const handlesubmit = (event) => {
+    const handlesubmit = async (event) => {
         event.preventDefault();
         const fName = firstName.trim();
         const lName = lastName.trim();
@@ -59,42 +60,66 @@ const Signin = () => {
                     text: "Please Compelte Your Password",
             });
         else{
-        if(role === "Manger")
-                {
-                    localStorage.setItem("user", JSON.stringify({ Fname: fName, Lname: lName, Email: Email }));
-                    localStorage.setItem("token" , "omar");
+            if(role === "Manger")
+            {
+                try{
+                    const Token = await SignIn({role: "ADMIN" , email: Email , password: Password})
+                    localStorage.setItem("token" , Token);
+                    localStorage.setItem("user", JSON.stringify({ Fname: fName , Lname: lName , Email: Email }));
                     localStorage.setItem("role" , "Manger");
                     Swal.fire({
-                        icon: "success",
-                        title: "Signed Sucssesfuly ....",
+                                icon: "success",
+                                title: "Signed Sucssesfuly ....",
                     });
                     navigate("/" , "Manger");
-                    setFirstName(""),setLastName(""),setEmail(""),setPassword(""),setRole("");
-        }
-        else if(role === "Staf")
-                {
+                    setFirstName("");setLastName("");setEmail("");
+                    setPassword("");setRole("");
+                }catch(error){
+                    Swal.fire({
+                        icon: "error",
+                        title: `Error ${error}`,
+                })}
+            }
+            else if(role === "Staf")
+            {
+                try{
+                    const Token = await SignIn({role: "STAFF" , email: Email , password: Password});
+                    localStorage.setItem("token" , Token);
                     localStorage.setItem("user", JSON.stringify({ Fname: fName, Lname: lName, Email: Email }));
-                    localStorage.setItem("token" , "omar");
                     localStorage.setItem("role" , "Staf");
                     Swal.fire({
-                        icon: "success",
-                        title: "Signed Sucssesfuly ....",
+                                icon: "success",
+                                title: "Signed Sucssesfuly ....",
                     });
                     navigate("/" , "Staf");
-                    setFirstName(""),setLastName(""),setEmail(""),setPassword(""),setRole("");
-        }
-        else if (role === "Patient")
+                    setFirstName("");setLastName("");setEmail("");
+                    setPassword("");setRole("");
+                }catch(error){
+                    Swal.fire({
+                        icon: "error",
+                        title: `Error ${error}`,
+                })}
+            }
+            else if (role === "Patient")
             {
-                localStorage.setItem("user", JSON.stringify({ Fname: fName, Lname: lName, Email: Email }));
-                localStorage.setItem("token" , "omar");
-                localStorage.setItem("role" , "Patient");
-                Swal.fire({
-                    icon: "success",
-                    title: "Signed Sucssesfuly ....",
-                });
-                navigate("/appinetment" , "Patient");
-                setFirstName(""),setLastName(""),setEmail(""),setPassword(""),setRole("");
-        }
+                try{
+                    const Token = await SignIn({role: "USER" , email: Email , password: Password});
+                    localStorage.setItem("token" , Token);
+                    localStorage.setItem("user", JSON.stringify({ Fname: fName, Lname: lName, Email: Email }));
+                    localStorage.setItem("role" , "Patient");
+                    Swal.fire({
+                            icon: "success",
+                            title: "Signed Sucssesfuly ....",
+                    });
+                    navigate("/appinetment" , "Patient");
+                    setFirstName("");setLastName("");setEmail("");
+                    setPassword("");setRole("");
+                }catch(error){
+                    Swal.fire({
+                        icon: "error",
+                        title: `Error ${error}`,
+                })}
+            }
         }
     }
     return (

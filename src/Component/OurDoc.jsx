@@ -7,8 +7,8 @@ import 'swiper/css/pagination';
 
 // import required modules
 import { Autoplay } from 'swiper/modules';
-import './styles.css';
 import { img2, img4, img5 } from '../assets';
+import './styles.css';
 
 const OurDoc = () => {
     const data = [
@@ -19,6 +19,7 @@ const OurDoc = () => {
         { id: 4 , title: "Mohamed Ahmed", img: img2},
         { id: 5 , title: "Abdallah Amr", img: img5}
     ]
+
     return (
         <section>
             <div className="mx-[5%]! pt-10!">

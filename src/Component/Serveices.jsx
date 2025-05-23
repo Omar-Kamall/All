@@ -7,8 +7,8 @@ import 'swiper/css/pagination';
 
 // import required modules
 import { Pagination , Autoplay } from 'swiper/modules';
-import './styles.css';
 import { img1, img10, img11, img12, img13, img14 } from '../assets';
+import './styles.css';
 
 const Serveices = () => {
     const data = [

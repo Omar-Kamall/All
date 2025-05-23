@@ -54,7 +54,7 @@ const App = () => {
   // Routes Pages
   const router = createBrowserRouter(createRoutesFromElements(
     <Route>
-      <Route path='/' element={<Layout />} >
+      <Route path='/' element={<Layout />}>
         <Route index element={<Home />}/>
         <Route path='/about' element={<About />}/>
         <Route path='/appinetment' element={<Appinetment />}/>
@@ -88,6 +88,7 @@ const App = () => {
     },3000)
     return clearTimeout(timer);
   },[])
+
   return (
     <>
       {loading ? <div className='bg-black h-[100vh] flex justify-center items-center'>
