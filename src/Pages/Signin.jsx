@@ -88,8 +88,8 @@ const Signin = () => {
                     localStorage.setItem("user", JSON.stringify({ Fname: fName, Lname: lName, Email: Email }));
                     localStorage.setItem("role" , "Staf");
                     Swal.fire({
-                                icon: "success",
-                                title: "Signed Sucssesfuly ....",
+                        icon: "success",
+                        title: "Signed Sucssesfuly ....",
                     });
                     navigate("/" , "Staf");
                     setFirstName("");setLastName("");setEmail("");

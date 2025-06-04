@@ -19,25 +19,27 @@ Api.interceptors.request.use((config) => {
 
 export const Appointment_Post_Data = async ({
     firstname , lastname , email ,
-    mobilnumber , adress , national_identity_card ,
+    mobilnumber , adress , national_identity_card , date_of_birth ,
     gender , appointment_date , department_name , doctor_name }) => {
         try{
             const res = await Api.post("/addappointment" , {
                 firstname , lastname , email ,
-                mobilnumber , adress , national_identity_card ,
+                mobilnumber , adress , national_identity_card , date_of_birth ,
                 gender , appointment_date , department_name , doctor_name
             })
-            return res.data
+            return res.data;
         }catch(error){
             console.log(error);
+            throw error;
         }
-    }
+}
 
 export const Appointment_Get_Data = async () => {
     try{
-        const res = await Api.get("/addappointment");
+        const res = await Api.get("/getdata");
         return res.data
     }catch(error){
         console.log(error);
+        throw error;
     }
 }

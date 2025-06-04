@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Swal from 'sweetalert2';
+import { Appointment_Post_Data } from '../Api/Appointment';
 
 const Appinetment = () => {
     const data = [
@@ -29,7 +30,7 @@ const Appinetment = () => {
     const [doctor_name ,setDoctor_name] = useState('');
     const [address ,setAddress] = useState('');
     // On Submit
-    const handle = (event) => {
+    const handle = async (event) => {
         event.preventDefault();
         const fname = fristname.trim();
         const lname = lastname.trim();
@@ -109,11 +110,26 @@ const Appinetment = () => {
                     text: "Please Enter Address",
             });
         else{
-            Swal.fire({
-                icon: "success",
-                title: "Rigster Sucssesfuly ....",
-            });
-            event.target.reset();
+            try{
+                const res = await Appointment_Post_Data({firstname: fname , lastname: lname , email: Email , mobilnumber: Tel ,
+                    adress: Address , national_identity_card: NIC , date_of_birth: Date , gender: Gender ,
+                    appointment_date: Appointment_Date , department_name: { id: Department_Name} , doctor_name: {id: Doctor_Name}
+                })
+                console.log(res);
+                Swal.fire({
+                    icon: "success",
+                    title: "Rigster Sucssesfuly ....",
+                });
+                setFristname("");setLastname("");setEmail("");setTel("");
+                setNic("");setDate("");setGender("");setAppointment_date("");
+                setDepartment_name("");setDoctor_name("");setAddress("");
+            }catch(error)
+            {
+                Swal.fire({
+                    icon: "error",
+                    title: error,
+                });
+            }
         }
     }
     return (
@@ -148,13 +164,13 @@ const Appinetment = () => {
                                 <select value={department_name} onChange={(e) => setDepartment_name(e.target.value)} name="department_name" className="p-2! m-2! ring-4 ring-gray-400 focus:border-0 focus:ring-4 focus:ring-[#c5baff] outline-none rounded transition duration-500">
                                     <option value="">Department Name</option>
                                     {data.map(item => (
-                                        <option key={item.id} value={item.name}>{item.name}</option>
+                                        <option key={item.id} value="1">{item.name}</option>
                                     ))}
-                                </select> 
+                                </select>
                                 <select value={doctor_name} onChange={(e) => setDoctor_name(e.target.value)} name="doctor_name" className="p-2! m-2! ring-4 ring-gray-400 focus:border-0 focus:ring-4 focus:ring-[#c5baff] outline-none rounded transition duration-500">
                                     <option value="">Doctor Name</option>
-                                    <option value="omar">Omar Kamal</option>
-                                </select> 
+                                    <option value="1">Omar Kamal</option>
+                                </select>
                             </div>
                             <div className="grid grid-cols-1">
                                 <textarea value={address} onChange={(e) => setAddress(e.target.value)} className="h-30 p-2! m-2! ring-4 ring-gray-400 focus:border-0 focus:ring-4 focus:ring-[#c5baff] outline-none rounded transition duration-500" name="address" placeholder="Address Or Location"></textarea>

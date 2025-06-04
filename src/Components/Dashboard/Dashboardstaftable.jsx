@@ -1,12 +1,21 @@
-const data = [
-    { id: 0, name: 'Sam', dname: "omar" , dob: '1954-06-13' , gender: "male" , email: "omar@gmail.com" , phone: "01006677452" , address: "Mans" , department: "tools" , date: '1954-06-13' },
-    { id: 1, name: 'Sam', dname: "omar" , dob: '1954-06-13' , gender: "male" , email: "omar@gmail.com" , phone: "01006677452" , address: "Mans" , department: "tools" , date: '1954-06-13' },
-    { id: 2, name: 'Sam', dname: "omar" , dob: '1954-06-13' , gender: "male" , email: "omar@gmail.com" , phone: "01006677452" , address: "Mans" , department: "tools" , date: '1954-06-13' },
-    { id: 3, name: 'Sam', dname: "omar" , dob: '1954-06-13' , gender: "male" , email: "omar@gmail.com" , phone: "01006677452" , address: "Mans" , department: "tools" , date: '1954-06-13' },
-    { id: 4, name: 'Sam', dname: "omar" , dob: '1954-06-13' , gender: "male" , email: "omar@gmail.com" , phone: "01006677452" , address: "Mans" , department: "tools" , date: '1954-06-13' },
-];
+import { useEffect, useState } from "react";
+import { Appointment_Get_Data } from "../../Api/Appointment";
 
 const Dashboardstaftable = () => {
+    const [data_Reservations , setData_Reservations] = useState([]);
+    useEffect(() => {
+        const fetch_Data = async () => {
+            try{
+                const data = await Appointment_Get_Data();
+                setData_Reservations(data);
+            }catch(error){
+                console.log(error);
+            }
+        }
+        fetch_Data();
+    },[])
+
+
     return (
         <section>
             <div className="container mx-auto! px-[5%]! mt-10!">
@@ -26,16 +35,16 @@ const Dashboardstaftable = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {data.map(item => (
+                            {data_Reservations.map(item => (
                                 <tr className="hover:bg-gray-50 border-t-1 border-gray-200" key={item.id}>
-                                    <th className="px-6! py-4! whitespace-nowrap text-sm text-gray-700">{item.name}</th>
-                                    <th className="px-6! py-4! whitespace-nowrap text-sm text-gray-700">{item.dob}</th>
+                                    <th className="px-6! py-4! whitespace-nowrap text-sm text-gray-700">{item.firstname + " " + item.lastname}</th>
+                                    <th className="px-6! py-4! whitespace-nowrap text-sm text-gray-700">{item.date_of_birth}</th>
                                     <th className="px-6! py-4! whitespace-nowrap text-sm text-gray-700">{item.gender}</th>
                                     <th className="px-6! py-4! whitespace-nowrap text-sm text-gray-700">{item.email}</th>
-                                    <th className="px-6! py-4! whitespace-nowrap text-sm text-gray-700">{item.phone}</th>
-                                    <th className="px-6! py-4! whitespace-nowrap text-sm text-gray-700">{item.address}</th>
-                                    <th className="px-6! py-4! whitespace-nowrap text-sm text-gray-700">{item.department}</th>
-                                    <th className="px-6! py-4! whitespace-nowrap text-sm text-gray-700">{item.date}</th>
+                                    <th className="px-6! py-4! whitespace-nowrap text-sm text-gray-700">{item.mobilnumber}</th>
+                                    <th className="px-6! py-4! whitespace-nowrap text-sm text-gray-700">{item.adress}</th>
+                                    <th className="px-6! py-4! whitespace-nowrap text-sm text-gray-700">{item.department_name.departmentName}</th>
+                                    <th className="px-6! py-4! whitespace-nowrap text-sm text-gray-700">{item.appointment_date}</th>
                                 </tr>
                             ))}
                         </tbody>

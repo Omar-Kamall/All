@@ -1,8 +1,11 @@
 import { useState } from 'react';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
+import { Staff_Delete_Data, Staff_Post_Data, Staff_Update_Data } from "../../Api/Staff"
+import Swal from 'sweetalert2';
 
 const StaffForm = () => {
     // Data Input
+    const [id, setId] = useState(0);
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [role, setRole] = useState('');
@@ -21,7 +24,75 @@ const StaffForm = () => {
     // Submit
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('Form Data:');
+        const Submit_Data = async () => {
+            try{
+                const res = await Staff_Post_Data({
+                    firstname: firstName , lastname: lastName , gender: gender ,
+                    role: role , mobilnumber: mobile , email: email , adress: address ,
+                    national_identity_card: nic , date_of_birth: dateOfBirth , password: password
+                });
+                console.log(res);
+                Swal.fire({
+                    icon: "success",
+                    title: "Saved Sucssesfuly ....",
+                });
+            }catch(error){
+                Swal.fire({
+                    icon: "error",
+                    title: error,
+                });
+                throw error;
+            }
+        }
+        Submit_Data();
+    };
+
+    // Update
+    const handle_update = (e) => {
+        e.preventDefault();
+        const Submit_Data = async () => {
+            try{
+                const res = await Staff_Update_Data({
+                    id: id ,firstname: firstName , lastname: lastName , gender: gender ,
+                    role: role , mobilnumber: mobile , email: email , adress: address ,
+                    national_identity_card: nic , date_of_birth: dateOfBirth , password: password
+                });
+                console.log(res);
+                Swal.fire({
+                    icon: "success",
+                    title: "Saved Sucssesfuly ....",
+                });
+            }catch(error){
+                Swal.fire({
+                    icon: "error",
+                    title: error,
+                });
+                throw error;
+            }
+        }
+        Submit_Data();
+    };
+
+    // Delete
+    const handle_delete = (e) => {
+        e.preventDefault();
+        const Delete_Data = async () => {
+            try{
+                const res = await Staff_Delete_Data(id);
+                console.log(res);
+                Swal.fire({
+                    icon: "success",
+                    title: "Deleted Sucssesfuly ....",
+                });
+            }catch(error){
+                Swal.fire({
+                    icon: "error",
+                    title: error,
+                });
+                throw error;
+            }
+        }
+        Delete_Data();
     };
 
     return (
@@ -34,8 +105,8 @@ const StaffForm = () => {
                     </button>
                     <div className="flex items-center">
                         <input
-                            type="text"
-                            placeholder="ID"
+                            type="text" onChange={(e) => setId(e.target.value)}
+                            placeholder="ID" value={id}
                             className="w-20 lg:w-50 ring-3 ring-gray-400 focus:border-0 focus:ring-[#c5baff] outline-none rounded-l-lg px-4! py-2! cursor-pointer"
                         />
                         <button className="bg-yellow-400 text-white px-4! py-3! rounded-r-lg hover:bg-yellow-500 transition-colors cursor-pointer">
@@ -70,9 +141,9 @@ const StaffForm = () => {
                         className="ring-4 ring-gray-400 focus:border-0 focus:ring-4 focus:ring-[#c5baff] outline-none rounded-lg px-4! py-2! cursor-pointer"
                     >
                         <option value="">Role</option>
-                        <option value="doctor">Doctor</option>
-                        <option value="nurse">Nurse</option>
-                        <option value="staff">Staff</option>
+                        <option value="STAFF">Doctor</option>
+                        <option value="STAFF">Nurse</option>
+                        <option value="STAFF">Staff</option>
                     </select>
                     <select
                         name="gender"
@@ -83,6 +154,7 @@ const StaffForm = () => {
                         <option value="">Gender</option>
                         <option value="male">Male</option>
                         <option value="female">Female</option>
+                        <option value="custom">custom</option>
                     </select>
                     <input
                         type="email"
@@ -169,17 +241,17 @@ const StaffForm = () => {
                     </div>
                 </div>
                 <div className="flex gap-4 justify-center mt-10!">
-                    <button className="bg-green-500 text-white px-6! py-2! rounded-lg hover:bg-green-600 transition-colors cursor-pointer">
+                    <button type='submit' className="bg-green-500 text-white px-6! py-2! rounded-lg hover:bg-green-600 transition-colors cursor-pointer">
                         Register
                     </button>
                     <button
-                        type="button"
+                        type="button" onClick={handle_update}
                         className="bg-blue-500 text-white px-6! py-2! rounded-lg hover:bg-blue-600 transition-colors cursor-pointer"
                     >
                         Update
                     </button>
                     <button
-                        type="button"
+                        type="button" onClick={handle_delete}
                         className="bg-red-500 text-white px-6! py-2! rounded-lg hover:bg-red-600 transition-colors cursor-pointer"
                     >
                         Delete
